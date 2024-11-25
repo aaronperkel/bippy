@@ -16,3 +16,5 @@ logs/
 # Ignore backup or temporary files
 *.bak
 *.tmp
+
+repomix-output.txt
