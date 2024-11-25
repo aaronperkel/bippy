@@ -1,4 +1,5 @@
 # src/states/title_state.py
+
 import pygame as pg
 from ..settings import SCREEN_WIDTH, SCREEN_HEIGHT
 
@@ -14,13 +15,22 @@ class TitleState:
         for event in events:
             if event.type == pg.MOUSEBUTTONDOWN:
                 if self.play_button_rect.collidepoint(event.pos):
-                    from states.playing_state import PlayingState
+                    from .playing_state import PlayingState
                     self.state_machine.add_state('playing', PlayingState(self.state_machine, self.assets))
                     self.state_machine.change_state('playing')
 
     def draw(self, surface):
         surface.fill((0, 0, 0))
-        surface.blit(self.title_text, (SCREEN_WIDTH // 2 - self.title_text.get_width() // 2, 100))
+        surface.blit(
+            self.title_text,
+            (SCREEN_WIDTH // 2 - self.title_text.get_width() // 2, 100)
+        )
         pg.draw.rect(surface, (255, 255, 255), self.play_button_rect)
         play_text = self.font.render('PLAY', True, (0, 0, 0))
-        surface.blit(play_text, (self.play_button_rect.centerx - play_text.get_width() // 2, self.play_button_rect.centery - play_text.get_height() // 2))
+        surface.blit(
+            play_text,
+            (
+                self.play_button_rect.centerx - play_text.get_width() // 2,
+                self.play_button_rect.centery - play_text.get_height() // 2
+            )
+        )

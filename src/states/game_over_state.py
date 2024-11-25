@@ -1,6 +1,6 @@
 # src/states/game_over_state.py
 import pygame as pg
-from settings import SCREEN_WIDTH, SCREEN_HEIGHT
+from ..settings import SCREEN_WIDTH, SCREEN_HEIGHT
 
 class GameOverState:
     def __init__(self, state_machine, assets):
@@ -14,7 +14,7 @@ class GameOverState:
         for event in events:
             if event.type == pg.MOUSEBUTTONDOWN:
                 if self.restart_button_rect.collidepoint(event.pos):
-                    from states.playing_state import PlayingState
+                    from .playing_state import PlayingState
                     self.state_machine.add_state('playing', PlayingState(self.state_machine, self.assets))
                     self.state_machine.change_state('playing')
 
