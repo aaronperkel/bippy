@@ -1,3 +1,18 @@
-textures/.DS_Store
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+
+# Virtual environment
+venv/
+env/
+
+# System files
 .DS_Store
-repomix-output.txt
+
+# Log files
+logs/
+*.log
+
+# Ignore backup or temporary files
+*.bak
+*.tmp
