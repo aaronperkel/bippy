@@ -13,8 +13,8 @@ import sys
 import random
 
 # Constants
-SCREEN_WIDTH = 600
-SCREEN_HEIGHT = 400
+SCREEN_WIDTH = 1200
+SCREEN_HEIGHT = 800
 FPS = 60
 
 # Initialize Pygame
@@ -81,18 +81,29 @@ def load_assets():
 class Obstacle(pg.sprite.Sprite):
     def __init__(self, x, speed, assets):
         super().__init__()
-        self.image = random.choice(assets['fire'])
-        self.rect = self.image.get_rect(midbottom=(x, 376))
+        self.images = assets['fire']  # List of fire images for animation
+        self.current_image = 0
+        self.animation_speed = 0.15  # Adjust for animation speed
+        self.animation_timer = 0
+        self.rect = self.images[0].get_rect(midbottom=(x, 376))
         self.speed = speed
         self.pipe_image = assets['pipe']
-    
+
     def update(self):
         self.rect.x -= self.speed
         if self.rect.right < 0:
             self.kill()
-    
+        # Update animation
+        self.animation_timer += self.animation_speed
+        if self.animation_timer >= 1:
+            self.animation_timer = 0
+            self.current_image = (self.current_image + 1) % len(self.images)
+
     def draw(self, surface):
-        surface.blit(self.image, self.rect)
+        # Draw the current image
+        image = self.images[self.current_image]
+        surface.blit(image, self.rect)
+        # Draw the pipe
         pipe_rect = self.pipe_image.get_rect(midtop=(self.rect.centerx, self.rect.bottom))
         surface.blit(self.pipe_image, pipe_rect)
 
@@ -130,7 +141,7 @@ class Game:
     def __init__(self):
         self.assets = load_assets()
         self.state = TITLE
-        self.player = Player(50, 330, self.assets)
+        self.player = Player(160, 330, self.assets)
         self.obstacles = pg.sprite.Group()
         self.bg_x = 0
         self.bg_speed = 3
@@ -147,7 +158,7 @@ class Game:
         self.intro_stage = 0  # To keep track of dialogue stages
 
     def reset(self):
-        self.player = Player(50, 330, self.assets)
+        self.player = Player(160, 330, self.assets)
         self.obstacles = pg.sprite.Group()
         self.bg_x = 0
         self.score = 0
@@ -268,27 +279,27 @@ class Game:
             self.intro_player_x = 160
 
         # Dialogue sequence
-        if elapsed_time <= 3:
+        if elapsed_time <= 1:
             # Fippy says "Hey Bippy <3"
             screen.blit(self.assets['fippy1_text'], (360, 300))
-        elif elapsed_time <= 5:
+        elif elapsed_time <= 2:
             # Bippy says "Hey Fippy <3"
             screen.blit(self.assets['bippy1_text'], (120, 300))
-        elif elapsed_time <= 6:
+        elif elapsed_time <= 4:
             # Villain moves towards Fippy
             if self.intro_villain_x > 460:
                 self.intro_villain_x -= 4
-        elif elapsed_time <= 8:
             # Bippy says "FIPPY WATCH OUT!"
             screen.blit(self.assets['bippy2_text'], (120, 300))
+        elif elapsed_time <= 5:
             # Villain says "I got you now Fippy!"
             screen.blit(self.assets['villain1_text'], (self.intro_villain_x - 80, 286))
-        elif elapsed_time <= 10:
+        elif elapsed_time <= 8:
             # Villain takes Fippy away
             self.intro_girl_x = self.intro_villain_x - 54
             self.intro_villain_x += 4
             screen.blit(self.assets['fippy2_text'], (self.intro_girl_x - 40, 300))
-        elif elapsed_time <= 12:
+        elif elapsed_time <= 10:
             # Bippy says "I'LL SAVE YOU!"
             screen.blit(self.assets['bippy3_text'], (120, 300))
         else:
@@ -347,7 +358,7 @@ class Game:
         score_text = self.assets['font_medium'].render(f'Your Score: {self.score}', True, (0, 0, 0))
         screen.blit(score_text, (SCREEN_WIDTH//2 - score_text.get_width()//2, 200))
         # Display Sad Bippy
-        screen.blit(self.assets['manSad'], (SCREEN_WIDTH//2 - self.assets['manSad'].get_width()//2, 140))
+        # screen.blit(self.assets['manSad'], (SCREEN_WIDTH//2 - self.assets['manSad'].get_width()//2, 140))
         # Restart Button
         mouse_x, mouse_y = pg.mouse.get_pos()
         restart_button_rect = pg.Rect(210, 340, 180, 44)
