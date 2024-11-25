@@ -1,6 +1,6 @@
 # src/states/title_state.py
 import pygame as pg
-from settings import SCREEN_WIDTH, SCREEN_HEIGHT
+from ..settings import SCREEN_WIDTH, SCREEN_HEIGHT
 
 class TitleState:
     def __init__(self, state_machine, assets):
