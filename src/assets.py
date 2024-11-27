@@ -13,8 +13,8 @@ class AssetManager:
     
     def load_assets(self):
         # Load images
-        self.images['button'] = pg.image.load(os.path.join(IMAGE_DIR, 'ui/button.png')).convert_alpha()
-        self.images['buttonPress'] = pg.image.load(os.path.join(IMAGE_DIR, 'ui/buttonPress.png')).convert_alpha()
+        self.images['play_button'] = pg.image.load(os.path.join(IMAGE_DIR, 'ui/play_button.png')).convert_alpha()
+        self.images['play_button_hover'] = pg.image.load(os.path.join(IMAGE_DIR, 'ui/play_button_hover.png')).convert_alpha()
         
         # Scale images proportionally
         self.images['man'] = pg.transform.scale(
