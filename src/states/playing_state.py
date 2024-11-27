@@ -11,7 +11,7 @@ class PlayingState:
         self.state_machine = state_machine
         self.assets = assets
         player_start_x = SCREEN_WIDTH * 0.1
-        player_start_y = SCREEN_HEIGHT - 48 - self.assets.get_image('man').get_height()
+        player_start_y = SCREEN_HEIGHT - 48 - self.assets.get_image('bippy').get_height()
         self.player = Player(player_start_x, player_start_y, self.assets)
         self.obstacles = pg.sprite.Group()
         self.bg_x = 0

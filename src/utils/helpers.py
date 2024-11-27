@@ -8,5 +8,5 @@ def clamp(value, min_value, max_value):
 def tint_image(image, tint_color):
     """Apply a tint to an image."""
     tinted_image = image.copy()
-    tinted_image.fill(tint_color + (0,), None, pg.BLEND_RGBA_MULT)
+    tinted_image.fill(tint_color + (255,), None, pg.BLEND_RGBA_MULT)
     return tinted_image

@@ -13,13 +13,13 @@ class AssetManager:
     
     def load_assets(self):
         # Load images
-        self.images['play_button'] = pg.image.load(os.path.join(IMAGE_DIR, 'ui/play_button.png')).convert_alpha()
-        self.images['play_button_hover'] = pg.image.load(os.path.join(IMAGE_DIR, 'ui/play_button_hover.png')).convert_alpha()
+        self.images['play_button'] = pg.transform.scale(pg.image.load(os.path.join(IMAGE_DIR, 'ui/play_button.png')).convert_alpha(), (270, 66))
+        self.images['play_button_hover'] = pg.transform.scale(pg.image.load(os.path.join(IMAGE_DIR, 'ui/play_button_hover.png')).convert_alpha(), (270, 66))
         
         # Scale images proportionally
-        self.images['man'] = pg.transform.scale(
+        self.images['bippy'] = pg.transform.scale(
             pg.image.load(os.path.join(IMAGE_DIR, 'characters/bippy/man.png')).convert_alpha(), (100, 92))
-        self.images['manSad'] = pg.transform.scale(
+        self.images['bippy_sad'] = pg.transform.scale(
             pg.image.load(os.path.join(IMAGE_DIR, 'characters/bippy/manSad.png')).convert_alpha(), (256, 256))
         self.images['bg'] = pg.transform.scale(
             pg.image.load(os.path.join(IMAGE_DIR, 'backgrounds/bg.png')).convert_alpha(), (SCREEN_WIDTH, SCREEN_HEIGHT))
