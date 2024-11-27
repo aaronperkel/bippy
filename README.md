@@ -36,6 +36,12 @@ A side-scrolling platformer where you control **Bippy** on a mission to save **F
     pip install -r requirements.txt
     ```
 
+## Running the Game
+While in the root directory, run the following command:
+```bash
+python -m src.main   
+```
+
 ## Author
 - Aaron Perkel
 -   Date: November 2024
