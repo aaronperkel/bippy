@@ -28,7 +28,6 @@ A side-scrolling platformer where you control **Bippy** on a mission to save **F
     ```bash
     python -m venv venv
     source venv/bin/activate  # On Windows: venv\Scripts\activate
-    pip install -r requirements.txt
     ```
 
 4. **Install Dependencies**
